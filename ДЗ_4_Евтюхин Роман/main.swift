@@ -202,12 +202,15 @@ class Porsche: Car {
         super.init (brand: brand, model: model, body: body, transmission: transmission, fuel: fuel, radiusDisks: radiusDisks, spoiler: spoiler)
     }
     override func closedSpoiler() {
-        if self.engine == .off && self.spoiler == .open {
+        switch (engine, spoiler) {
+        case (.off, .open):
             self.spoiler = .closed
             print("Внимание! В \(brand) \(model) спойлер открывается автоматически при старте двигателя!")
-        } else if self.engine == .on && self.spoiler == .closed {
+        case (.on, .closed):
             self.spoiler = .open
             print("Внимание! В \(brand) \(model) спойлер закрывается автоматически при стопе двигателя!")
+        default:
+            print("Внимание! В \(brand) \(model) спойлер авоматический!")
         }
     }
     func printPorsche() {
@@ -237,3 +240,5 @@ print("---------------------")
 porsche.printPorsche()
 porsche.engine = .off
 print("---------------------")
+
+
